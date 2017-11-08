@@ -1,15 +1,15 @@
 // ==== Node Modules
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 // ==== Local Files
-import { About, Home, Layout } from './containers';
+import { About, Home, Layout } from 'containers';
 
 const routes = () => (
-  <div>
+  <Switch>
     <Route exact path="/" component={Layout} />
     <Route path="/about" component={About} />
     <Route path="/home" component={Home} />
-  </div>
+  </Switch>
 );
 // ==== Routes must be exported in order for HMR to work.
 

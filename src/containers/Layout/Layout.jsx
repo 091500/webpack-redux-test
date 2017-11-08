@@ -3,31 +3,18 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
 // ==== Local Files
-import { HelmetHead } from '../../containers';
-import { Header, Footer } from '../../components';
+import { Header, Footer } from 'components';
 
-const styles = theme => ({
-  root: {
-    marginTop: theme.spacing.unit * 3,
-    width: '100%',
-  },
-});
 
 function Layout(props) {
   const { classes } = props;
   return (
-    <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Header/>
-        <Toolbar>
-          <Typography type="title" color="inherit">
-            Title
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar position="static" color="default">
+      <Header/>
+      {props.children}
+      <Footer/>
+    </AppBar>
   );
 }
 
@@ -52,4 +39,4 @@ function Layout(props) {
 //   children: PropTypes.element.isRequired,
 // };
 
-export default withStyles(styles)(Layout);
+export default Layout;

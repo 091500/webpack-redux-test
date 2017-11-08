@@ -1,18 +1,24 @@
 // ==== Node Modules
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { createMuiTheme } from 'material-ui/styles'
 // ==== Local Files
-import getRoutes from '../../routes';
+import getRoutes from 'routes';
+
+const muiTheme = createMuiTheme();
 
 class Root extends React.Component {
   render() {
-    const { history, store } = this.props;
+    const { store } = this.props;
     return (
       <Provider store={store}>
-        <Router>
-          {getRoutes()}
-        </Router>
+        <MuiThemeProvider theme={muiTheme}>
+          <BrowserRouter>
+            {getRoutes()}
+          </BrowserRouter>
+        </MuiThemeProvider>
       </Provider>
     );
   }
