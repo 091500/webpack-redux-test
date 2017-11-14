@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { createMuiTheme } from 'material-ui/styles'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
 // ==== Local Files
 import getRoutes from 'routes';
 

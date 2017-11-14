@@ -1,25 +1,52 @@
-// ==== Node Modules
-import { createStore } from 'redux';
-// ==== Local Files
+import { applyMiddleware, compose, createStore as createReduxStore } from 'redux'
+import thunk from 'redux-thunk'
+// import { browserHistory } from 'react-router'
 import rootReducer from '../reducers';
-// import enhancer from './storeEnhancer';
+// import { updateLocation } from './location'
 
 
-const configureStore = (initialState) => {
-  const store = createStore(
-    rootReducer,
-    initialState, // Typically defaulted to empty object
-  );
-  // Creating your Redux store
+const configureStore = (initialState = {}) => {
+  // ======================================================
+  // Middleware Configuration
+  // ======================================================
+  const middleware = [thunk]
 
-  if (__DEVELOPMENT__ && module.hot) {
-    module.hot.accept('../reducers', () => {
-      store.replaceReducer(rootReducer);
-    });
-    // Enable HMR for reducers.
+  // ======================================================
+  // Store Enhancers
+  // ======================================================
+  const enhancers = []
+  let composeEnhancers = compose
+
+  if (__DEVELOPMENT__) {
+    if (typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function') {
+      composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    }
   }
 
-  return store;
-};
+  // ======================================================
+  // Store Instantiation and HMR Setup
+  // ======================================================
+  const store = createReduxStore(
+    rootReducer,
+    initialState,
+    composeEnhancers(
+      applyMiddleware(...middleware),
+      ...enhancers
+    )
+  )
+  store.asyncReducers = {}
 
-export default configureStore;
+  // To unsubscribe, invoke `store.unsubscribeHistory()` anytime
+  // store.unsubscribeHistory = browserHistory.listen(updateLocation(store))
+
+  if (module.hot) {
+    module.hot.accept('../reducers', () => {
+      const reducers = require('../reducers').default
+      store.replaceReducer(reducers(store.asyncReducers))
+    })
+  }
+
+  return store
+}
+
+export default configureStore
