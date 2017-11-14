@@ -1,14 +1,17 @@
 // ==== Node Modules
 import React from 'react';
 // ==== Local Files
+import { Layout, PageContent } from 'containers';
 
 class About extends React.Component {
 
   render() {
     return (
-      <div>
-        <b>about</b>
-      </div>
+      <Layout>
+        <PageContent>
+          <b>about</b>
+        </PageContent>
+      </Layout>
     );
   }
 }

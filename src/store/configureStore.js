@@ -1,8 +1,7 @@
-import { applyMiddleware, compose, createStore as createReduxStore } from 'redux'
+import { applyMiddleware, combineReducers, compose, createStore as createReduxStore } from 'redux'
 import thunk from 'redux-thunk'
-// import { browserHistory } from 'react-router'
 import rootReducer from '../reducers';
-// import { updateLocation } from './location'
+import { routerReducer } from 'react-router-redux'
 
 
 const configureStore = (initialState = {}) => {
@@ -27,8 +26,10 @@ const configureStore = (initialState = {}) => {
   // Store Instantiation and HMR Setup
   // ======================================================
   const store = createReduxStore(
-    rootReducer,
-    initialState,
+    combineReducers({
+        ...rootReducer,
+      router: routerReducer
+    }),
     composeEnhancers(
       applyMiddleware(...middleware),
       ...enhancers

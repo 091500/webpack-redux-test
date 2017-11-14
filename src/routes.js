@@ -7,8 +7,8 @@ import { About, Home, Layout } from 'containers';
 const routes = () => (
   <Switch>
     <Route exact path="/" component={Layout} />
-    <Route path="/about" component={About} />
     <Route path="/home" component={Home} />
+    <Route path="/about" component={About} />
   </Switch>
 );
 // ==== Routes must be exported in order for HMR to work.

@@ -1,15 +1,15 @@
 // ==== Node Modules
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { createMuiTheme } from 'material-ui/styles'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-
+import { ConnectedRouter } from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory'
 // ==== Local Files
 import getRoutes from 'routes';
 
 const muiTheme = createMuiTheme();
+const history = createHistory()
 
 class Root extends React.Component {
   render() {
@@ -17,9 +17,9 @@ class Root extends React.Component {
     return (
       <Provider store={store}>
         <MuiThemeProvider theme={muiTheme}>
-          <BrowserRouter>
+          <ConnectedRouter history={history}>
             {getRoutes()}
-          </BrowserRouter>
+          </ConnectedRouter>
         </MuiThemeProvider>
       </Provider>
     );

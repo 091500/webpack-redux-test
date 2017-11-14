@@ -18,11 +18,11 @@ function Header(props) {
   const { classes } = props;
   return (
     <div>
+      <Button raised color="primary" className={classes.button} component={NavLink} to="/home">
+        Home
+      </Button>
       <Button raised className={classes.button} component={NavLink} to="/about">
         About
-      </Button>
-      <Button raised color="primary" className={classes.button}>
-        Primary
       </Button>
     </div>
   )

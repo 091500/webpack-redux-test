@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div className='row' style={{color: 'green'}}>
         <input type={'text'} />
-        {"test from react 533586665444444444444"}
+        {"test from react"}
         <b>this is545</b>
       </div>
     )
